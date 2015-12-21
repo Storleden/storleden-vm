@@ -34,8 +34,9 @@ vagrantfile:
                     - '--parser future'
         synced_folder:
             vflsf_3xwz63iq1z9c:
-                source: '/Your/Path/here'
-                target: /var/www/cirkor.dev/htdocs
+                # Edit: currentproject
+                source: '/Path/To/The/Current/Project'
+                target: /var/www/project.dev
                 # Windows: smb
                 # Linux and Mac: nfs
                 sync_type: default
@@ -90,7 +91,7 @@ locale:
             - en_GB.UTF-8
             - en_US.UTF-8
 firewall:
-    install: '1'
+    install: '0'
     rules: {  }
 cron:
     install: '1'
@@ -165,11 +166,17 @@ apache:
         - expires
         - vhost_alias
     vhosts:
-        av_cirkor:
-            servername: cirkor.dev
+        # Edit:
+        # av_<currentproject>
+        av_project:
+            # Edit:
+            # servername: <currentproject>
+            servername: project.dev
+            # www.<currentproject>.dev
             serveraliases:
-                - www.cirkor.dev
-            docroot: /var/www/cirkor.dev/htdocs
+                - www.project.dev
+            # Edit docroot: /var/www/<currentproject>.dev/htdocs
+            docroot: /var/www/project.dev/htdocs
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -183,7 +190,8 @@ apache:
             ssl_cipher: ''
             directories:
                 avd_4bzexe868su9:
-                    path: /var/www/cirkor.dev/htdocs
+                    # Edit: path: /var/www/<currentproject>.dev/htdocs
+                    path: /var/www/project.dev/htdocs
                     options:
                         - Indexes
                         - FollowSymlinks
@@ -277,7 +285,7 @@ wpcli:
     install: '0'
     version: v0.19.0
 drush:
-    install: '1'
+    install: '0'
     version: 7.1.0
 ruby:
     install: '1'
@@ -329,16 +337,17 @@ mariadb:
     install: '1'
     settings:
         version: '10.0'
-        root_password: maria
+        root_password: mariastorleden
         override_options: {  }
     adminer: '1'
+    # Edit: <currentproject>
     users:
         mariadbnu_nid7pavjdjks:
             name: devstorleden
             password: devstorleden
     databases:
         mariadbnd_30ibrqb53wxt:
-            name: dev_cirkor
+            name: dev_project
             sql: ''
     grants:
         mariadbng_3xje2xeg3szi:
@@ -353,10 +362,11 @@ postgresql:
             encoding: UTF8
             version: '9.3'
         server:
-            postgres_password: arenabolaget
+            postgres_password: psqlstorleden
     databases:
+        # Edit: <currentproject>
         postsqlnd_yejpt0oufism:
-            dbname: dev_storleden
+            dbname: dev_project
             owner: devstorleden
     users:
         postsqlnu_gdro2uymcy5z:
@@ -365,7 +375,7 @@ postgresql:
     grants:
         postsqlng_c4yw09cwvlwz:
             role: devstorleden
-            db: dev_storleden
+            db: dev_project
             privilege:
                 - ALL
     adminer: '0'
