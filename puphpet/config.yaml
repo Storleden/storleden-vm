@@ -79,6 +79,7 @@ server:
         - htop
         - nfs-common
         - cifs-utils
+        - screen
 users_groups:
     install: '1'
     groups: {  }
