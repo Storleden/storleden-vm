@@ -223,24 +223,41 @@ php:
             - fpm
             - gd
         pear: {  }
-        pecl: {  }
+        pecl:
+            - uploadprogress
+            - apcu
+            - yaml
     ini:
         display_errors: 'On'
         session.save_path: /var/lib/php/session
-        date.timezone: UTC
-        max_execution_time: '130'
+        date.timezone: Europe/Stockholm
+        max_execution_time: '300'
         error_reporting: ALL
         display_startup_errors: 'On'
         html_errors: 'On'
         memory_limit: 512M
-        upload_max_filesize: 50M
-        post_max_size: 50M
+        always_populate_raw_post_data: '-1'
+        upload_max_filesize: '50M'
+        post_max_size: '50M'
+        realpath_cache_size: '16M'
+        realpath_cache_ttl: '3600'
         opcache.enable: '1'
         opcache.interned_strings_buffer: '24'
         opcache.memory_consumption: '256'
-        opcache.max_accelerated_files: '4000'
+        opcache.max_accelerated_files: '10000'
         opcache.revalidate_freq: '3'
         opcache.fast_shutdown: '1'
+        opcache.enable_cli: '1'
+        apc.shm_size: '128M'
+        apc.ttl: '0'
+        apc.gc_ttl: '600'
+        apc.enable_cli: '1'
+        apc.mmap_file_mask: '/tmp/apc.XXXXXX'
+        apc.stat: '1'
+        error_log: '/var/log/php_errors.log'
+        mbstring.http_input: 'pass'
+        mbstring.http_output: 'pass'
+        mbstring.func_overload: '0'
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
@@ -290,14 +307,32 @@ drush:
     version: 7.1.0
 ruby:
     install: '1'
-    versions: {  }
+    versions:
+        hRDoJFjOLzkH:
+            default: '1'
+            version: 1.9.3
+            gems:
+                - sass
+                - compass
+                - guard
+                - livereload
+            bundler: '1'
 python:
     install: '1'
     packages: {  }
     versions: {  }
 nodejs:
-    install: '0'
-    npm_packages: {  }
+    install: '1'
+    npm_packages:
+        - yo
+        - gulp
+        - bower
+        - coffee-script
+        - jshint
+        - csslint
+        - eslint
+        - nodemon
+        - grunt-cli
 hhvm:
     install: '0'
     nightly: 0
@@ -339,7 +374,16 @@ mariadb:
     settings:
         version: '10.0'
         root_password: mariastorleden
-        override_options: {  }
+        override_options:
+            'mysqld':
+                'bind-address': '0.0.0.0'
+                'max_allowed_packet': '128M'
+                'wait_timeout': '600'
+                'query_cache_type': '1'
+                'query_cache_size': '128M'
+                'query_cache_limit': '2M'
+                'innodb_flush_log_at_trx_commit': '2'
+                'innodb_lock_wait_timeout': '40'
     adminer: '1'
     # Edit: <currentproject>
     users:
