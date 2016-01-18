@@ -370,7 +370,8 @@ mysql:
             privileges:
                 - ALL
 mariadb:
-    install: '1'
+    # Edit 1 = Active 0, 0 = Unactive
+    install: '0'
     settings:
         version: '10.0'
         root_password: mariastorleden
@@ -401,6 +402,7 @@ mariadb:
             privileges:
                 - ALL
 postgresql:
+    # Edit 1 = Active 0, 0 = Unactive
     install: '0'
     settings:
         global:
