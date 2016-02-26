@@ -2,6 +2,6 @@
 
 composer global require drupal/console
 
-chmod +x $HOME/.config/composer/vendor/bin/drush
+chmod +x $HOME/.config/composer/vendor/bin/drupal
 
 drupal init --override
