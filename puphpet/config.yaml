@@ -13,6 +13,9 @@ vagrantfile:
                 vflnp_rvqshw7nrzwp:
                     host: '5231'
                     guest: '22'
+                vflnp_rvqshw7nr098:
+                    host: '35729'
+                    guest: '35729'
         post_up_message: ''
         provider:
             virtualbox:
@@ -425,7 +428,7 @@ postgresql:
             db: dev_project
             privilege:
                 - ALL
-    adminer: '0'
+    adminer: '1'
 mongodb:
     install: '0'
     settings:
