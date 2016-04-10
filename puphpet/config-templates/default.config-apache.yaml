@@ -1,3 +1,2 @@
 apache:
-	# 1 = On, 0 = Off
-    install: '0'
+    install: '1'

@@ -1,40 +1,45 @@
 vagrantfile:
     target: local
     vm:
-        box: puphpet/ubuntu1404-x64
-        box_url: puphpet/ubuntu1404-x64
-        hostname: local.storleden
-        memory: '2048'
-        cpus: '2'
-        chosen_provider: virtualbox
-        network:
-            private_network: 192.168.56.88
-            forwarded_port:
-                vflnp_rvqshw7nrzwp:
-                    host: '5231'
-                    guest: '22'
-                vflnp_rvqshw7nr098:
-                    host: '35729'
-                    guest: '35729'
-        post_up_message: ''
         provider:
-            virtualbox:
-                modifyvm:
-                    natdnshostresolver1: 'on'
-                showgui: '0'
-            vmware:
-                numvcpus: 1
-            parallels:
-                cpus: 1
+            local:
+                box: puphpet/ubuntu1404-x64
+                box_url: puphpet/ubuntu1404-x64
+                box_version: '0'
+                chosen_virtualizer: virtualbox
+                virtualizers:
+                    virtualbox:
+                        modifyvm:
+                            natdnshostresolver1: false
+                        showgui: 0
+                    vmware:
+                        numvcpus: 1
+                    parallels:
+                        use_linked_clone: 0
+                        check_guest_tools: 0
+                        update_guest_tools: 0
+                machines:
+                    vflm_ngtk2d5a3shv:
+                        id: storleden
+                        network:
+                            private_network: 192.168.56.88
+                            forwarded_port:
+                                vflmnfp_4zbfjfn4jegc:
+                                    host: '9289'
+                                    guest: '22'
+                                vflnp_rvqshw7nr098:
+                                    host: '35729'
+                                    guest: '35729'
+                        hostname: local.storleden
+                        memory: '2048'
+                        cpus: '2'
         provision:
             puppet:
-                manifests_path: puphpet/puppet
-                manifest_file: site.pp
+                manifests_path: puphpet/puppet/manifests
                 module_path: puphpet/puppet/modules
                 options:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
-                    - '--parser future'
     ssh:
         host: null
         port: null

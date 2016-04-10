@@ -1,10 +1,10 @@
 ##
 # Use this file as template.
-# 
-# Save 
+#
+# Save
 #
 # Sync types are:
-#    - default For all hosts the most secure sync method.    
+#    - default For all hosts the most secure sync method.
 #    - nfs (recommended for Linux and Mac)
 #    - smb (recommended for Windows)
 vagrantfile:

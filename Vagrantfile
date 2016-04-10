@@ -15,9 +15,12 @@ if File.file?("#{dir}/puphpet/config-#{provider}.yaml")
   configValues.deep_merge!(custom)
 end
 
-if File.file?("#{dir}/puphpet/config-custom.yaml")
-  custom = YAML.load_file("#{dir}/puphpet/config-custom.yaml")
-  configValues.deep_merge!(custom)
+Dir.glob("#{dir}/puphpet/custom/config-(.+)\.yaml").each do |config_file|
+  puts "#{dir}/puphpet/custom/#{config_file}\n"
+  if File.file?(config_file)
+    custom = YAML.load_file("#{dir}/puphpet/custom/#{config_file}")
+    configValues.deep_merge!(custom)
+  end
 end
 
 data = configValues['vagrantfile']
