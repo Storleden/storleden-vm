@@ -1,0 +1,15 @@
+postgresql:
+    databases:
+        postsqlnd_yejpt0oufism:
+            dbname: dev_project
+            owner: devstorleden
+    users:
+        postsqlnu_gdro2uymcy5z:
+            username: devstorleden
+            password: devstorleden
+    grants:
+        postsqlng_c4yw09cwvlwz:
+            role: devstorleden
+            db: dev_project
+            privilege:
+                - ALL

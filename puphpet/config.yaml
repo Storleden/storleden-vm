@@ -35,34 +35,6 @@ vagrantfile:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
-        synced_folder:
-            vflsf_3xwz63iq1z9c:
-                # Edit: currentproject
-                source: '/Path/To/The/Current/Project'
-                target: /var/www/project.dev
-                # Windows: smb
-                # Linux and Mac: nfs
-                sync_type: default
-                smb:
-                    smb_username: ''
-                    smb_password: ''
-                    mount_options:
-                        dir_mode: 0775
-                        file_mode: 0664
-                rsync:
-                    args:
-                        - '--verbose'
-                        - '--archive'
-                        - '-z'
-                    exclude:
-                        - .vagrant/
-                        - .git/
-                    auto: 'true'
-                owner: www-data
-                group: www-data
-        usable_port_range:
-            start: 10200
-            stop: 10500
     ssh:
         host: null
         port: null
@@ -81,6 +53,7 @@ server:
         - vim
         - htop
         - nfs-common
+        - git
         - cifs-utils
         - screen
 users_groups:
@@ -107,55 +80,9 @@ nginx:
         proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
     upstreams: {  }
-    vhosts:
-        nxv_dg8i3tf5kpee:
-            server_name: awesome.dev
-            server_aliases:
-                - www.awesome.dev
-            www_root: /var/www/awesome
-            listen_port: '80'
-            index_files:
-                - index.html
-                - index.htm
-                - index.php
-            client_max_body_size: 1m
-            ssl: '0'
-            ssl_cert: ''
-            ssl_key: ''
-            ssl_port: '443'
-            ssl_protocols: ''
-            ssl_ciphers: ''
-            rewrite_to_https: '1'
-            spdy: '1'
-            locations:
-                nxvl_tso6rsv8wwze:
-                    location: /
-                    autoindex: 'off'
-                    internal: 'false'
-                    try_files:
-                        - $uri
-                        - $uri/
-                        - /index.php$is_args$args
-                    fastcgi: ''
-                    fastcgi_index: ''
-                    fastcgi_split_path: ''
-                nxvl_5arh61gq432g:
-                    location: '~ \.php$'
-                    autoindex: 'off'
-                    internal: 'false'
-                    try_files:
-                        - $uri
-                        - $uri/
-                        - /index.php$is_args$args
-                    fastcgi: '127.0.0.1:9000'
-                    fastcgi_index: index.php
-                    fastcgi_split_path: '^(.+\.php)(/.*)$'
-                    fast_cgi_params_extra:
-                        - 'SCRIPT_FILENAME $request_filename'
-                        - 'APP_ENV dev'
     proxies: {  }
 apache:
-    install: '1'
+    install: '0'
     settings:
         user: www-data
         group: www-data
@@ -169,53 +96,10 @@ apache:
         - headers
         - expires
         - vhost_alias
-    vhosts:
-        # Edit:
-        # av_<currentproject>
-        av_project:
-            # Edit:
-            # servername: <currentproject>
-            servername: project.dev
-            # www.<currentproject>.dev
-            serveraliases:
-                - www.project.dev
-            # Edit docroot: /var/www/<currentproject>.dev/htdocs
-            docroot: /var/www/project.dev/htdocs
-            port: '80'
-            setenv:
-                - 'APP_ENV dev'
-            custom_fragment: ''
-            ssl: '0'
-            ssl_cert: ''
-            ssl_key: ''
-            ssl_chain: ''
-            ssl_certs_dir: ''
-            ssl_protocol: ''
-            ssl_cipher: ''
-            directories:
-                avd_4bzexe868su9:
-                    # Edit: path: /var/www/<currentproject>.dev/htdocs
-                    path: /var/www/project.dev/htdocs
-                    options:
-                        - Indexes
-                        - FollowSymlinks
-                        - MultiViews
-                    allow_override:
-                        - All
-                    require:
-                        - 'all granted'
-                    custom_fragment: ''
-                    files_match:
-                        avdfm_iuay67c7im9i:
-                            path: \.php$
-                            sethandler: 'proxy:fcgi://127.0.0.1:9000'
-                            custom_fragment: ''
-                            provider: filesmatch
-                    provider: directory
 php:
     install: '1'
     settings:
-        version: '55'
+        version: '56'
     modules:
         php:
             - cli
@@ -301,7 +185,7 @@ blackfire:
             log_file: ''
             log_level: '1'
 xhprof:
-    install: '1'
+    install: '0'
 wpcli:
     install: '0'
     version: v0.19.0
@@ -355,29 +239,7 @@ mysql:
     install: '0'
     settings:
         version: '5.6'
-        root_password: '123'
-        override_options: {  }
-    adminer: 0
-    users:
-        mysqlnu_9s2b4eishtao:
-            name: dbuser
-            password: '123'
-    databases:
-        mysqlnd_ib1jm8ymdoy0:
-            name: dbname
-            sql: ''
-    grants:
-        mysqlng_xpu9yzdana4i:
-            user: dbuser
-            table: '*.*'
-            privileges:
-                - ALL
-mariadb:
-    # Edit 1 = Active 0, 0 = Unactive
-    install: '0'
-    settings:
-        version: '10.0'
-        root_password: mariastorleden
+        root_password: 'mysqlstorleden'
         override_options:
             'mysqld':
                 'bind-address': '0.0.0.0'
@@ -388,8 +250,37 @@ mariadb:
                 'query_cache_limit': '2M'
                 'innodb_flush_log_at_trx_commit': '2'
                 'innodb_lock_wait_timeout': '40'
-    adminer: '1'
-    # Edit: <currentproject>
+    adminer: 1
+    users:
+        mysqlnu_9s2b4eishtao:
+            name: devstorleden
+            password: 'devstorleden'
+    databases:
+        mysqlnd_ib1jm8ymdoy0:
+            name: dev_project
+            sql: ''
+    grants:
+        mysqlng_xpu9yzdana4i:
+            user: devstorleden
+            table: '*.*'
+            privileges:
+                - ALL
+mariadb:
+    install: '0'
+    settings:
+        version: '10.0'
+        root_password: 'mariadbstorleden'
+        override_options:
+            'mysqld':
+                'bind-address': '0.0.0.0'
+                'max_allowed_packet': '128M'
+                'wait_timeout': '600'
+                'query_cache_type': '1'
+                'query_cache_size': '128M'
+                'query_cache_limit': '2M'
+                'innodb_flush_log_at_trx_commit': '2'
+                'innodb_lock_wait_timeout': '40'
+    adminer: 1
     users:
         mariadbnu_nid7pavjdjks:
             name: devstorleden
@@ -405,16 +296,14 @@ mariadb:
             privileges:
                 - ALL
 postgresql:
-    # Edit 1 = Active 0, 0 = Unactive
     install: '0'
     settings:
         global:
             encoding: UTF8
             version: '9.3'
         server:
-            postgres_password: psqlstorleden
+            postgres_password: 'psqlstorleden'
     databases:
-        # Edit: <currentproject>
         postsqlnd_yejpt0oufism:
             dbname: dev_project
             owner: devstorleden
@@ -428,7 +317,7 @@ postgresql:
             db: dev_project
             privilege:
                 - ALL
-    adminer: '1'
+    adminer: 1
 mongodb:
     install: '0'
     settings:

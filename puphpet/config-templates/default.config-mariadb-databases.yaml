@@ -1,0 +1,15 @@
+mariadb:
+    users:
+        mariadbnu_nid7pavjdjks:
+            name: devstorleden
+            password: devstorleden
+    databases:
+        mariadbnd_30ibrqb53wxt:
+            name: dev_project
+            sql: ''
+    grants:
+        mariadbng_3xje2xeg3szi:
+            user: devstorleden
+            table: '*.*'
+            privileges:
+                - ALL

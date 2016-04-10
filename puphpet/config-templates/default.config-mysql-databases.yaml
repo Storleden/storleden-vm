@@ -1,0 +1,15 @@
+mysql:
+    users:
+        mysqlnu_9s2b4eishtao:
+            name: devstorleden
+            password: 'devstorleden'
+    databases:
+        mysqlnd_ib1jm8ymdoy0:
+            name: dev_project
+            sql: ''
+    grants:
+        mysqlng_xpu9yzdana4i:
+            user: devstorleden
+            table: '*.*'
+            privileges:
+                - ALL
