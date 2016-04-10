@@ -31,8 +31,8 @@ vagrantfile:
                                     host: '35729'
                                     guest: '35729'
                         hostname: local.storleden
-                        memory: '2048'
-                        cpus: '2'
+                        memory: '4096'
+                        cpus: '4'
         provision:
             puppet:
                 manifests_path: puphpet/puppet/manifests
@@ -40,18 +40,29 @@ vagrantfile:
                 options:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
+        usable_port_range:
+            start: 10200
+            stop: 10500
+        post_up_message: ''
     ssh:
-        host: null
-        port: null
-        private_key_path: null
+        host: 'false'
+        port: 'false'
+        private_key_path: 'false'
         username: vagrant
-        guest_port: null
-        keep_alive: true
-        forward_agent: false
-        forward_x11: false
+        guest_port: 'false'
+        keep_alive: '1'
+        forward_agent: 'false'
+        forward_x11: 'false'
         shell: 'bash -l'
+        insert_key: 'false'
     vagrant:
         host: detect
+    proxy:
+        http: ''
+        https: ''
+        ftp: ''
+        no_proxy: ''
+        enabled: ''
 server:
     install: '1'
     packages:
@@ -73,8 +84,14 @@ locale:
             - en_GB.UTF-8
             - en_US.UTF-8
 firewall:
-    install: '0'
-    rules: {  }
+    install: '1'
+    rules:
+        fr_lk5vskuka2dn:
+            port:
+                - '35729'
+            priority: '100'
+            proto: tcp
+            action: accept
 cron:
     install: '1'
     jobs: {  }
@@ -84,11 +101,16 @@ nginx:
         default_vhost: 1
         proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
+        proxy_connect_timeout: 600s
+        proxy_send_timeout: 600s
+        proxy_read_timeout: 600s
+        names_hash_bucket_size: 128
     upstreams: {  }
     proxies: {  }
 apache:
     install: '0'
     settings:
+        version: 2.4
         user: www-data
         group: www-data
         default_vhost: true
@@ -110,15 +132,15 @@ php:
             - cli
             - intl
             - mcrypt
+            - mbstring
             - curl
             - common
             - fpm
             - gd
+            - xml
+            - zip
         pear: {  }
-        pecl:
-            - uploadprogress
-            - apcu
-            - yaml
+        pecl: {  }
     ini:
         display_errors: 'On'
         session.save_path: /var/lib/php/session
@@ -255,7 +277,7 @@ mysql:
                 'query_cache_limit': '2M'
                 'innodb_flush_log_at_trx_commit': '2'
                 'innodb_lock_wait_timeout': '40'
-    adminer: 1
+    adminer: '1'
     users:
         mysqlnu_9s2b4eishtao:
             name: devstorleden
@@ -285,7 +307,7 @@ mariadb:
                 'query_cache_limit': '2M'
                 'innodb_flush_log_at_trx_commit': '2'
                 'innodb_lock_wait_timeout': '40'
-    adminer: 1
+    adminer: '1'
     users:
         mariadbnu_nid7pavjdjks:
             name: devstorleden
@@ -322,7 +344,7 @@ postgresql:
             db: dev_project
             privilege:
                 - ALL
-    adminer: 1
+    adminer: '1'
 mongodb:
     install: '0'
     settings:

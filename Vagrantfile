@@ -15,10 +15,9 @@ if File.file?("#{dir}/puphpet/config-#{provider}.yaml")
   configValues.deep_merge!(custom)
 end
 
-Dir.glob("#{dir}/puphpet/custom/config-(.+)\.yaml").each do |config_file|
-  puts "#{dir}/puphpet/custom/#{config_file}\n"
+Dir.glob("#{dir}/puphpet/custom/config-*.yaml").each do |config_file|
   if File.file?(config_file)
-    custom = YAML.load_file("#{dir}/puphpet/custom/#{config_file}")
+    custom = YAML.load_file("#{config_file}")
     configValues.deep_merge!(custom)
   end
 end
