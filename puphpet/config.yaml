@@ -84,7 +84,7 @@ locale:
             - en_GB.UTF-8
             - en_US.UTF-8
 firewall:
-    install: '1'
+    install: '0'
     rules:
         fr_lk5vskuka2dn:
             port:
@@ -143,13 +143,13 @@ php:
         pecl: {  }
     ini:
         display_errors: 'On'
-        session.save_path: /var/lib/php/session
-        date.timezone: Europe/Stockholm
+        session.save_path: '/var/lib/php/session'
+        date.timezone: 'Europe/Stockholm'
         max_execution_time: '300'
         error_reporting: ALL
         display_startup_errors: 'On'
         html_errors: 'On'
-        memory_limit: 512M
+        memory_limit: '512M'
         always_populate_raw_post_data: '-1'
         upload_max_filesize: '50M'
         post_max_size: '50M'
