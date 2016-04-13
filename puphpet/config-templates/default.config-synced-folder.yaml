@@ -8,9 +8,9 @@
 #    - nfs (recommended for Linux and Mac)
 #    - smb (recommended for Windows)
 vagrantfile:
-	vm:
-		synced_folder:
-			thunder:
+    vm:
+        synced_folder:
+            thunder:
                 source: '/Path/To/The/Current/Project'
                 target: /var/www/project.dev
                 sync_type: nfs
