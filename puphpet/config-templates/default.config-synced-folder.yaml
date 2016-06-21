@@ -9,9 +9,26 @@
 #    - smb (recommended for Windows)
 vagrantfile:
     vm:
+        provider:
+            local:
+                machines:
+                    vflm_ngtk2d5a3shv:
+                        id: projectid
+                        network:
+                            private_network: 192.168.56.88
+                            forwarded_port:
+                                vflmnfp_4zbfjfn4jegc:
+                                    host: '9289'
+                                    guest: '22'
+                                vflnp_rvqshw7nr098:
+                                    host: '35729'
+                                    guest: '35729'
+                        hostname: local.projectid
+                        memory: '2046'
+                        cpus: '2'
         synced_folder:
             thunder:
-                source: '/Path/To/The/Current/Project'
+                source: /Path/To/The/Current/Project
                 target: /var/www/project.dev
                 sync_type: nfs
                 smb:

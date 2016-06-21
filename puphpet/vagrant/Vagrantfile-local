@@ -158,7 +158,7 @@ machines.each do |i, machine|
             machine_id.vm.synced_folder "#{folder['source']}", "#{folder['target']}",
               id: "#{i}",
               type: 'nfs',
-              :nfs => { :mount_options => ["dmode=777","fmode=666"] }
+              :nfs => { :mount_options => ['dmode=777', 'fmode=666'] }
           end
         elsif folder['sync_type'] == 'smb'
           smb__host     = !folder['smb']['smb_host'].nil? ?
