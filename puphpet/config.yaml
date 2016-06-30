@@ -84,11 +84,29 @@ locale:
             - en_GB.UTF-8
             - en_US.UTF-8
 firewall:
-    install: '0'
+    install: '1'
     rules:
         fr_lk5vskuka2dn:
             port:
                 - '35729'
+            priority: '100'
+            proto: tcp
+            action: accept
+        fr_srfvskuka2dn:
+            port:
+                - '80'
+            priority: '100'
+            proto: tcp
+            action: accept
+        fr_svbnskukfgtn:
+            port:
+                - '8080'
+            priority: '100'
+            proto: tcp
+            action: accept
+        fr_svbnskuka2dn:
+            port:
+                - '442'
             priority: '100'
             proto: tcp
             action: accept
@@ -126,7 +144,7 @@ apache:
 php:
     install: '1'
     settings:
-        version: '56'
+        version: '70'
     modules:
         php:
             - cli

@@ -39,5 +39,9 @@ data = configValues['vagrantfile']
 Vagrant.require_version '>= 1.8.1'
 
 Vagrant.configure('2') do |config|
+
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+
   eval File.read("#{dir}/puphpet/vagrant/Vagrantfile-#{data['target']}")
 end
