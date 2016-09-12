@@ -248,6 +248,9 @@ ruby:
                 - compass
                 - guard
                 - livereload
+                - deep_merge@1.0.1
+                - activesupport@4.2.6
+                - vine@0.2
             bundler: '1'
 python:
     install: '1'
@@ -256,6 +259,7 @@ python:
 nodejs:
     install: '1'
     npm_packages:
+        - n
         - yo
         - gulp
         - bower

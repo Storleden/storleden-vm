@@ -147,7 +147,8 @@ machines.each do |i, machine|
           if Vagrant.has_plugin?('vagrant-bindfs')
             machine_id.vm.synced_folder "#{folder['source']}", "/mnt/vagrant-#{i}",
               id: "#{i}",
-              type: 'nfs'
+              type: 'nfs',
+              :nfs => { :mount_options => ['nolock', 'noatime', 'actimeo=1'] }
             machine_id.bindfs.bind_folder "/mnt/vagrant-#{i}", "#{folder['target']}",
               after: :provision,
               force_user: sync_owner,
@@ -158,7 +159,7 @@ machines.each do |i, machine|
             machine_id.vm.synced_folder "#{folder['source']}", "#{folder['target']}",
               id: "#{i}",
               type: 'nfs',
-              :nfs => { :mount_options => ['dmode=777', 'fmode=666'] }
+              :nfs => { :mount_options => ['dmode=777', 'fmode=666', 'nolock' , 'noatime', 'actimeo=1'] }
           end
         elsif folder['sync_type'] == 'smb'
           smb__host     = !folder['smb']['smb_host'].nil? ?

@@ -1,0 +1,1 @@
+../startup-always-unprivileged/00-composer-setup.sh
