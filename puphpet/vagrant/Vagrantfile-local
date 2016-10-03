@@ -150,7 +150,6 @@ machines.each do |i, machine|
               type: 'nfs',
               :nfs => { :mount_options => ['nolock', 'noatime', 'actimeo=1'] }
             machine_id.bindfs.bind_folder "/mnt/vagrant-#{i}", "#{folder['target']}",
-              after: :provision,
               force_user: sync_owner,
               force_group: sync_group,
               perms: "u=rwX:g=rwX:o=rD",
