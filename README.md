@@ -1,4 +1,4 @@
-# Storleden VM (ubuntu 14.04)
+# Storleden VM (ubuntu 16.04)
 
 Virtual Machine vanilla to start projects.
 
