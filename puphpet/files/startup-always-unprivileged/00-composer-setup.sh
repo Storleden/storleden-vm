@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo '' >> $HOME/.bashrc
+
 echo "export PATH=\$PATH:\$HOME/.config/composer/vendor/bin" >> $HOME/.bashrc
 
 echo '' >> $HOME/.bashrc
